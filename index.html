@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Java Quiz</title>
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="timer">
+        <h3>Time: <span class="timer-count">0</span></h3>
+      </div>
+      <div class="view-scores">View high scores</div>
+    </header>
+    <section>
+      <div class="welcome-message">
+        <div class="quiz-title">
+          <h1>Coding Quiz Challenge</h1>
+        </div>
+        <div class="instructions">
+          <p>
+            Try to answer all of the code-related questions within the time
+            limit! Keep in mind that incorrect answers will penalize your
+            score/time 10 seconds!
+          </p>
+        </div>
+        <button class="start-button">Start</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="questions">
+        <div class="q-1"></div>
+        <ol class="answers"></ol>
+      </div>
+    </section>
+
+    <section>
+        <div class="initials-container">
+          <h1>All done!</h1>
+          <h2>Your final score is: <span class="your-score"></span></h2>
+          <form method="POST">
+            <div class="input-group">
+              <label for="initials">Enter initials:</label>
+              <input type="text" id="initials" placeholder="Initials" />
+              <button class="submit">Submit</button>
+            </div>
+          </form>
+    </section>
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>

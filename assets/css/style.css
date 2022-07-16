@@ -1,0 +1,47 @@
+header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.timer {
+  margin-top: 10px;
+  margin-right: 10%;
+}
+
+.view-scores {
+  margin-top: 10px;
+  margin-left: 10%;
+}
+
+.welcome-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+h1 {
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.instructions {
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 15px;
+}
+
+.initials-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+h2 {
+  justify-content: center;
+  margin-bottom: 15px;
+}
