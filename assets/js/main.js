@@ -1,41 +1,135 @@
-// when page loads - welcome message - "Java Coding Quiz" with instructions how to play displayed
-// "View Highscore" clickable text - top left corner
-// "Time: 0 " - displayed top tight
-// "Start Game" button
-
 // when user clicks "Start Game"
 // welcome message and start button disappear
 // first question appears - multiple choice (4 clickable answers)
 // timer starts (for (let i = 60; i > 0; i--)) else - game ends
 
-// when an answer is clicked, the next question is presented
-// if answer is correct - next question presented
-// else time is deducted (15 sec), next question presented
+// when an answer is clicked:
+// if answer is correct - display "Correct" beneath line under question - delay - next question presented
+// else time is deducted (10 sec) - "wrong" displayed beneath question - delay - next question presented
 // if there are no more quetions - game ends
 
-// when game ends;
-// timer stops
-// final question/answers disappear
-// display end game content
-//high score input element
-// high score submit button
-// store the input into local storage
-// reset and return to welcome message - (hide end game content)
-// resetting clears all variables
-
 // variable declaration
-var timerEl = document.querySelector(".timer-count");
+let questionsEl = document.getElementById("questions");
 
-var highScore = document.querySelector(".win");
+let showAnswers = document.querySelector("#showAnswer");
+
+var questionArea = document.querySelector(".questiions");
+
+var correctIncorrect = document.getElementById;
+
+var initialsInput = document.querySelector(".initials");
+
+var submitButton = document.querySelector(".submit");
+
+var scoresEl = document.querySelector(".view-scores");
+
+var timerEl = document.querySelector(".timer-count");
 
 var startButton = document.querySelector(".start-button");
 
-var secondsLeft = 61;
+var goBack = document.getElementById("go-back");
 
-// function clearTimer() {
-//   var clear = document.querySelector(".timer-count");
-//   clear.textContent = " ";
-// }
+var secondsLeft = 76;
+
+var currentQuestion = 0;
+
+const highScoresArray = [];
+
+const questionsArray = [
+  {
+    question: "This is Question #1",
+    answers: [
+      "This is Answer #1",
+      "This is Answer #2",
+      "This is Answer #3",
+      "This is Answer #4",
+    ],
+    correctAnswer: "This is Answer #1", // Test answer
+  },
+  {
+    question: "This is Question #2",
+    answers: [
+      "This is Answer #1/Question#2",
+      "This is Answer #2/Question#2",
+      "This is Answer #3/Question#2",
+      "This is Answer #4",
+    ],
+    correctAnswer: "This is Answer #1/Question#2", // Test answer
+  },
+  {
+    question: "This is Question #3",
+    answers: [
+      "This is Answer #1/Question#3",
+      "This is Answer #2/Question#3",
+      "This is Answer #3/Question#3",
+      "This is Answer #4/Question#3",
+    ],
+    correctAnswer: "This is Answer #1/Question#3", // Test answer
+  },
+  {
+    question: "This is Question #4",
+    answers: [
+      "This is Answer #1/Question#4",
+      "This is Answer #2/Question#4",
+      "This is Answer #3/Question#4",
+      "This is Answer #4/Question#4",
+    ],
+    correctAnswer: "This is Answer #1/Question#4", // Test answer
+  },
+  {
+    question: "This is Question #5",
+    answers: [
+      "This is Answer #1/Question#5",
+      "This is Answer #2/Question#5",
+      "This is Answer #3/Question#5",
+      "This is Answer #4/Question#5",
+    ],
+    correctAnswer: "This is Answer #1/Question#5", // Test answer
+  },
+];
+
+// Insert question into the div question as a p tag
+// Create an ordered list with answers in li
+// Add data attributes to the answers with the question number and the answer
+
+// functions
+function hideWelcome() {
+  var welcomeMessage = document.getElementById("welcome-message");
+  welcomeMessage.setAttribute("style", "display:none");
+}
+
+function showWelcome() {
+  var welcomeMessage = document.getElementById("welcome-message");
+  welcomeMessage.setAttribute("style", "display:block");
+}
+
+function displayQuestion() {
+  if (currentQuestion > questionsArray.length - 1) {
+    endGame();
+  } else {
+    questionsEl.textContent = questionsArray[currentQuestion].question;
+
+    showAnswers.innerHTML = "";
+
+    for (let index = 0; index < 4; index++) {
+      let answerChoice = document.createElement("li");
+
+      answerChoice.textContent = questionsArray[currentQuestion].answers[index];
+
+      showAnswers.append(answerChoice);
+    }
+  }
+}
+
+function hideScores() {
+  var hideScores = document.getElementById("high-scores");
+  hideScores.setAttribute("style", "display:none");
+}
+
+function showScores() {
+  var showScores = document.getElementById("high-scores");
+  showScores.setAttribute("style", "display:block");
+}
 
 function setTime() {
   // Sets interval in variable
@@ -47,29 +141,75 @@ function setTime() {
     if (secondsLeft === 0) {
       clearInterval(timerInterval);
       {
-        console.log("game over..");
-        // Calls function to send message
-        sendMessage();
+        endGame();
       }
     }
   }, 1000);
 }
 
 // function expressions
+// when game ends;
+// timer stops
+// final question/answers disappear
+// display end game content
+//high score input element
+// high score submit button
+// store the input into local storage
+// reset and return to welcome message - (hide end game content)
+// resetting clears all variables
+function endGame() {
+  var scoreEl = document.querySelector(".your-score");
+  var score = secondsLeft;
 
-function sendMessage() {
-  alert("game over..");
+  scoreEl.textContent = score;
+
+  showAnswers.innerHTML = "";
+  questionsEl.innerHTML = "";
 }
 
-// custom functions - event listeners
+// // logic
+goBack.addEventListener("click", () => {
+  showWelcome();
+});
 
-// logic
+submitButton.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  var initials = initialsInput.value.trim();
+
+  localStorage.setItem("initials", JSON.stringify(initials));
+  showScores();
+});
 
 // Attach event listener to start button to call
-startButton.addEventListener("click", setTime);
+startButton.addEventListener("click", () => {
+  hideWelcome();
+  setTime();
+  displayQuestion();
+});
 
-// Can attach multtiple funtions to single event listener
-// startButton.addEventListener("click", () => {
-//     invokeMe();
-//     alsoInvokeMe();
-// });
+showAnswers.addEventListener("click", function (event) {
+  if (
+    event.target.textContent === questionsArray[currentQuestion].correctAnswer
+  ) {
+    // text appears below - correct - delay then next question
+
+    currentQuestion++;
+    displayQuestion();
+  } else {
+    secondsLeft = secondsLeft - 10;
+    currentQuestion++;
+    displayQuestion();
+    // text appears below - incorrect - delay then next question
+  }
+});
+
+// scoresEl.addEventListener("click", viewScores);
+
+// / Add styling to list element
+// listEl.setAttribute("style", "background:#333333; padding:20px;");
+// // Add styling to list items
+// li1.setAttribute("style", " color:white; background: #666666; padding: 5px; margin-left: 35px;");
+// li2.setAttribute("style", " color:white; background: #777777; padding: 5px; margin-left: 35px;");
+// li3.setAttribute("style", " color:white; background: #888888; padding: 5px; margin-left: 35px;");
+// li4.setAttribute("style", " color:white; background: #999999; padding: 5px; margin-left: 35px;");

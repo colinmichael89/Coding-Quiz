@@ -16,7 +16,7 @@
       <div class="view-scores">View high scores</div>
     </header>
     <section>
-      <div class="welcome-message">
+      <div class="welcome-message" id="welcome-message">
         <div class="quiz-title">
           <h1>Coding Quiz Challenge</h1>
         </div>
@@ -29,12 +29,14 @@
         </div>
         <button class="start-button">Start</button>
       </div>
+      </div>
     </section>
 
     <section>
-      <div class="questions">
-        <div class="q-1"></div>
-        <ol class="answers"></ol>
+      <div class="question-container">
+        <h1 id="questions"></h1>
+        <ol id="showAnswer"></ol>
+        <h2 id="correct-incorrect"></h2>
       </div>
     </section>
 
@@ -45,11 +47,21 @@
           <form method="POST">
             <div class="input-group">
               <label for="initials">Enter initials:</label>
-              <input type="text" id="initials" placeholder="Initials" />
+              <input type="text" class="initials" placeholder="Initials" />
               <button class="submit">Submit</button>
             </div>
           </form>
     </section>
+
+    <section>
+      <div class="high-scores">
+        <h1>High Scores</h1>
+        <ol id="high-scores"></ol>
+        <button id="go-back">Go Back</button>
+        <button id="clear-scores">Clear High Scores</button>
+      </div>
+    </section>
+
     <script src="./assets/js/main.js"></script>
   </body>
 </html>
