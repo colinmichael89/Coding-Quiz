@@ -33,6 +33,10 @@ var secondsLeft = 76;
 
 var currentQuestion = 0;
 
+var rightWrong = document.getElementById("correct-incorrect");
+
+var clearScores = document.getElementById("clear-scores");
+
 const highScoresArray = [];
 
 const questionsArray = [
@@ -93,6 +97,11 @@ const questionsArray = [
 // Add data attributes to the answers with the question number and the answer
 
 // functions
+function hideQuestions() {
+  var questionArea = document.querySelector(".question-container");
+  questionArea.setAttribute("style", "display:none");
+}
+
 function hideWelcome() {
   var welcomeMessage = document.getElementById("welcome-message");
   welcomeMessage.setAttribute("style", "display:none");
@@ -101,6 +110,34 @@ function hideWelcome() {
 function showWelcome() {
   var welcomeMessage = document.getElementById("welcome-message");
   welcomeMessage.setAttribute("style", "display:block");
+}
+
+function hideInitials() {
+  var hideInitialsContainer = document.querySelector(".initials-container");
+  hideInitialsContainer.setAttribute("style", "display:none");
+}
+
+function showInitials() {
+  var showInitialsContainer = document.querySelector(".initials-container");
+  showInitialsContainer.setAttribute("style", "display:block");
+}
+
+function showScores() {
+  var showScores = document.querySelector(".high-scores-box");
+  showScores.setAttribute("style", "display:block");
+}
+
+function hideScores() {
+  var hideScores = document.querySelector(".high-scores-box");
+  hideScores.setAttribute("style", "display:none");
+}
+
+function scoreList() {
+  var highScores = document.querySelector(".high-scores");
+  //   for (let index = 0; index < 4; index++) {
+  let highScore = document.createElement("li");
+  highScores.highScore.textContent = highScoresArray;
+  index++;
 }
 
 function displayQuestion() {
@@ -119,16 +156,6 @@ function displayQuestion() {
       showAnswers.append(answerChoice);
     }
   }
-}
-
-function hideScores() {
-  var hideScores = document.getElementById("high-scores");
-  hideScores.setAttribute("style", "display:none");
-}
-
-function showScores() {
-  var showScores = document.getElementById("high-scores");
-  showScores.setAttribute("style", "display:block");
 }
 
 function setTime() {
@@ -165,11 +192,18 @@ function endGame() {
 
   showAnswers.innerHTML = "";
   questionsEl.innerHTML = "";
+  rightWrong.innerHTML = "";
+  showInitials();
 }
 
 // // logic
 goBack.addEventListener("click", () => {
+  hideScores();
   showWelcome();
+});
+
+clearScores.addEventListener("click", () => {
+  localStorage.clear();
 });
 
 submitButton.addEventListener("click", function (event) {
@@ -177,7 +211,10 @@ submitButton.addEventListener("click", function (event) {
 
   var initials = initialsInput.value.trim();
 
-  localStorage.setItem("initials", JSON.stringify(initials));
+  highScoresArray.push(initials);
+
+  localStorage.setItem("highSoresArray", JSON.stringify(highScoresArray));
+  hideInitials();
   showScores();
 });
 
@@ -188,22 +225,32 @@ startButton.addEventListener("click", () => {
   displayQuestion();
 });
 
+scoresEl.addEventListener("click", () => {
+  hideWelcome();
+  showScores();
+  hideInitials();
+  hideInitials();
+  hideQuestions();
+});
+
 showAnswers.addEventListener("click", function (event) {
   if (
     event.target.textContent === questionsArray[currentQuestion].correctAnswer
   ) {
     // text appears below - correct - delay then next question
-
+    rightWrong.textContent = "Correct!";
     currentQuestion++;
     displayQuestion();
   } else {
+    rightWrong.textContent = "Incorrect";
     secondsLeft = secondsLeft - 10;
     currentQuestion++;
     displayQuestion();
     // text appears below - incorrect - delay then next question
   }
 });
-
+hideScores();
+hideInitials();
 // scoresEl.addEventListener("click", viewScores);
 
 // / Add styling to list element
