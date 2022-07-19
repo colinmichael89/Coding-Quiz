@@ -168,6 +168,8 @@ goBack.addEventListener("click", () => {
 
 clearScores.addEventListener("click", () => {
   localStorage.clear();
+  hideScores();
+  showWelcome();
   // renderLocalstorage(listItem);
 
   // var points = document.querySelector("#high-scores");
@@ -183,7 +185,7 @@ submitButton.addEventListener("click", function (event) {
   if (initialsInput === "") {
     var enterInitials = document.getElementById("enter-initials");
     enterInitials.textContent = "What do we call you?";
-    showInitials();
+    // showInitials();
   } else {
     renderLocalstorage();
     var initScore = initials + " " + userScore;
@@ -214,6 +216,12 @@ function renderLocalstorage() {
   }
 }
 
+// function timeFunction() {
+//   setTimeout(function () {
+//     console.log("delay");
+//   }, 1000);
+// }
+
 // Attach event listener to start button to call
 startButton.addEventListener("click", () => {
   hideWelcome();
@@ -243,6 +251,7 @@ showAnswers.addEventListener("click", function (event) {
     rightWrong.textContent = "Incorrect";
     secondsLeft = secondsLeft - 10;
     currentQuestion++;
+    // timeFunction();
     displayQuestion();
     // text appears below - incorrect - delay then next question
   }

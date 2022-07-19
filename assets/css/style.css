@@ -55,23 +55,35 @@ h2 {
 
 .high-scores-box {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
 }
 
-.initials-container {
+/* .initials-container {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
+} */
+
+#high-scores {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.high-scores li {
-  justify-content: space-around;
-  margin-top: 20px;
-  margin-bottom: 20px;
+#go-back,
+#clear-scores {
+  padding: 10px;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+#high-scores li {
+  vertical-align: middle;
+  padding-bottom: 10px;
 }
 
 .start-button {
@@ -86,6 +98,7 @@ button {
 }
 
 #showAnswer li {
+  justify-items: center;
   padding: 10px 10px;
 }
 
@@ -97,7 +110,7 @@ input {
   background-color: aqua;
   border: none;
   font-size: 18px;
-  padding: 10px 20px;
+  padding: 10px 15px;
 }
 
 #enter-initials {
@@ -107,6 +120,5 @@ input {
 }
 
 .view-scores {
-  text-decoration: none;
   font-weight: bold;
 }
