@@ -136,18 +136,6 @@ function hideScores() {
   hideScores.setAttribute("style", "display:none");
 }
 
-//
-// Index is still not defined..?!!!!
-// function scoreList() {
-//   let highScore = document.createElement("li");
-
-//   highScore.textContent = highScoresArray[currentScore];
-//   currentScore++;
-//   //   index++;
-
-//   JSON.parse(localStorage).append(highScore);
-// }
-
 function displayScore() {
   console.log(currentScore);
   console.log(initialsInput.value);
@@ -226,7 +214,9 @@ submitButton.addEventListener("click", function (event) {
   //     console.log(localStorage.getItem(localStorage.key(i)));
   //   }
   if (initialsInput === "") {
-    displayMessage("error", "Email cannot be blank");
+    var enterInitials = document.getElementById("enter-initials");
+    enterInitials.textContent = "What do we call you?";
+    showInitials();
   } else {
     renderLocalstorage();
     var initScore = initials + " " + userScore;
@@ -294,12 +284,3 @@ showAnswers.addEventListener("click", function (event) {
 });
 hideScores();
 hideInitials();
-// scoresEl.addEventListener("click", viewScores);
-
-// / Add styling to list element
-// listEl.setAttribute("style", "background:#333333; padding:20px;");
-// // Add styling to list items
-// li1.setAttribute("style", " color:white; background: #666666; padding: 5px; margin-left: 35px;");
-// li2.setAttribute("style", " color:white; background: #777777; padding: 5px; margin-left: 35px;");
-// li3.setAttribute("style", " color:white; background: #888888; padding: 5px; margin-left: 35px;");
-// li4.setAttribute("style", " color:white; background: #999999; padding: 5px; margin-left: 35px;");
