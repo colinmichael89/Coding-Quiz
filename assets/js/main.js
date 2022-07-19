@@ -9,6 +9,12 @@
 // if there are no more quetions - game ends
 
 // variable declaration
+var secondsLeft = 76;
+
+var currentQuestion = 0;
+
+var currentScore = 0;
+
 let questionsEl = document.getElementById("questions");
 
 let showAnswers = document.querySelector("#showAnswer");
@@ -29,15 +35,13 @@ var startButton = document.querySelector(".start-button");
 
 var goBack = document.getElementById("go-back");
 
-var secondsLeft = 76;
-
-var currentQuestion = 0;
-
 var rightWrong = document.getElementById("correct-incorrect");
 
 var clearScores = document.getElementById("clear-scores");
 
-const highScoresArray = [];
+var highScores = document.getElementById("high-scores");
+
+var highScoresArray = [];
 
 const questionsArray = [
   {
@@ -132,14 +136,22 @@ function hideScores() {
   hideScores.setAttribute("style", "display:none");
 }
 
-function scoreList() {
-  var highScores = document.querySelector(".high-scores");
-  //   for (let index = 0; index < 4; index++) {
-  let highScore = document.createElement("li");
-  highScores.highScore.textContent = highScoresArray;
-  index++;
-}
+//
+// Index is still not defined..?!!!!
+// function scoreList() {
+//   let highScore = document.createElement("li");
 
+//   highScore.textContent = highScoresArray[currentScore];
+//   currentScore++;
+//   //   index++;
+
+//   JSON.parse(localStorage).append(highScore);
+// }
+
+function displayScore() {
+  console.log(currentScore);
+  console.log(initialsInput.value);
+}
 function displayQuestion() {
   if (currentQuestion > questionsArray.length - 1) {
     endGame();
@@ -157,10 +169,11 @@ function displayQuestion() {
     }
   }
 }
+var timerInterval;
 
 function setTime() {
   // Sets interval in variable
-  var timerInterval = setInterval(function () {
+  timerInterval = setInterval(function () {
     secondsLeft--;
     timerEl.textContent = "";
     timerEl.textContent = secondsLeft;
@@ -174,22 +187,14 @@ function setTime() {
   }, 1000);
 }
 
-// function expressions
-// when game ends;
-// timer stops
-// final question/answers disappear
-// display end game content
-//high score input element
-// high score submit button
-// store the input into local storage
-// reset and return to welcome message - (hide end game content)
-// resetting clears all variables
 function endGame() {
   var scoreEl = document.querySelector(".your-score");
   var score = secondsLeft;
 
   scoreEl.textContent = score;
-
+  //   timerEl = score;
+  timerEl.textContent = 0;
+  clearInterval(timerInterval);
   showAnswers.innerHTML = "";
   questionsEl.innerHTML = "";
   rightWrong.innerHTML = "";
@@ -210,17 +215,56 @@ submitButton.addEventListener("click", function (event) {
   event.preventDefault();
 
   var initials = initialsInput.value.trim();
+  var userScore = secondsLeft;
 
-  highScoresArray.push(initials);
+  //   var enterInit = document.getElementById("enter-initials");
 
-  localStorage.setItem("highSoresArray", JSON.stringify(highScoresArray));
-  hideInitials();
-  showScores();
+  //   enterInit.textContent = "Enter Initials";
+
+  //   for (var i = 0; i < localStorage.length; i++) {
+  //     // console.log(localStorage.key(i));
+  //     console.log(localStorage.getItem(localStorage.key(i)));
+  //   }
+  if (initialsInput === "") {
+    displayMessage("error", "Email cannot be blank");
+  } else {
+    renderLocalstorage();
+    var initScore = initials + " " + userScore;
+    highScoresArray.push(initScore);
+
+    localStorage.setItem("highScoresArray", JSON.stringify(highScoresArray));
+
+    showHighScore(highScoresArray);
+    hideInitials();
+    // scoreList();
+    showScores();
+    // displayScore();
+  }
 });
+
+function showHighScore(array) {
+  for (var i = 0; i < array.length; i++) {
+    var userEntry = array[i];
+    var listItem = document.createElement("li");
+
+    listItem.textContent = userEntry;
+    highScores.appendChild(listItem);
+  }
+}
+function renderLocalstorage() {
+  var localstorageArray = JSON.parse(localStorage.getItem("highScoresArray"));
+  console.log(localstorageArray);
+  if (localstorageArray !== null) {
+    highScoresArray = localstorageArray;
+  }
+}
 
 // Attach event listener to start button to call
 startButton.addEventListener("click", () => {
   hideWelcome();
+  // currentQuestion needs to be set back to 0 (index)
+  secondsLeft = 75;
+  currentQuestion = 0;
   setTime();
   displayQuestion();
 });
@@ -228,7 +272,6 @@ startButton.addEventListener("click", () => {
 scoresEl.addEventListener("click", () => {
   hideWelcome();
   showScores();
-  hideInitials();
   hideInitials();
   hideQuestions();
 });

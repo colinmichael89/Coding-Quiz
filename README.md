@@ -22,4 +22,4 @@ THEN I can save my initials and score
 
 The following image shows the web application's appearance and functionality:
 
-![Screenshot of working application](./screenshot.png)
+![Screenshot of working application](./.png)

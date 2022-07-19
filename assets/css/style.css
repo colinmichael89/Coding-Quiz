@@ -53,7 +53,7 @@ h2 {
   margin-top: 20px;
 }
 
-.high-scores-box {
+.high-scores {
   display: flex;
   flex-direction: column;
   align-items: center;
