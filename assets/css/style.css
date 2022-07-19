@@ -1,8 +1,15 @@
+body {
+  background-color: black;
+  color: aqua;
+  font-size: 30px;
+}
+
 header {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   margin-top: 10px;
+  margin-bottom: 10%;
 }
 
 .timer {
@@ -24,7 +31,7 @@ header {
 
 h1 {
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .instructions {
@@ -56,17 +63,50 @@ h2 {
 
 .initials-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
 }
 
-.high-scores {
-  display: flex;
-  flex-direction: row-reverse;
-
+.high-scores li {
   justify-content: space-around;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.start-button {
+  margin-top: 20px;
+}
+
+button {
+  background-color: aqua;
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+#showAnswer li {
+  padding: 10px 10px;
+}
+
+#correct-incorrect {
+  margin-top: 15px;
+}
+
+input {
+  background-color: aqua;
+  border: none;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+#enter-initials {
+  font-size: 30px;
+  font-weight: bolder;
+  margin-bottom: 15px;
+}
+
+.view-scores {
+  text-decoration: none;
+  font-weight: bold;
 }

@@ -45,60 +45,32 @@ var highScoresArray = [];
 
 const questionsArray = [
   {
-    question: "This is Question #1",
-    answers: [
-      "This is Answer #1",
-      "This is Answer #2",
-      "This is Answer #3",
-      "This is Answer #4",
-    ],
-    correctAnswer: "This is Answer #1", // Test answer
+    question: "Inside which HTML element do we put the JavaScript?",
+    answers: ["<script>", "<js>", "<javascript>", "<header>"],
+    correctAnswer: "<script>",
   },
   {
-    question: "This is Question #2",
-    answers: [
-      "This is Answer #1/Question#2",
-      "This is Answer #2/Question#2",
-      "This is Answer #3/Question#2",
-      "This is Answer #4",
-    ],
-    correctAnswer: "This is Answer #1/Question#2", // Test answer
+    question: "Which event occurs when the user clicks on an HTML element?",
+    answers: ["onclick", "onmouseclick", "onchange", "onmouseover"],
+    correctAnswer: "onclick",
   },
   {
-    question: "This is Question #3",
-    answers: [
-      "This is Answer #1/Question#3",
-      "This is Answer #2/Question#3",
-      "This is Answer #3/Question#3",
-      "This is Answer #4/Question#3",
-    ],
-    correctAnswer: "This is Answer #1/Question#3", // Test answer
+    question: "How do you declare a JavaScript variable?",
+    answers: ["variable carName", "v carName", "var carName", "Variable"],
+    correctAnswer: "var carName",
   },
   {
-    question: "This is Question #4",
-    answers: [
-      "This is Answer #1/Question#4",
-      "This is Answer #2/Question#4",
-      "This is Answer #3/Question#4",
-      "This is Answer #4/Question#4",
-    ],
-    correctAnswer: "This is Answer #1/Question#4", // Test answer
+    question: "JavaScript is a ______ -side programming language.",
+    answers: ["Client", "Server", "Both", "None"],
+    correctAnswer: "Both",
   },
   {
-    question: "This is Question #5",
-    answers: [
-      "This is Answer #1/Question#5",
-      "This is Answer #2/Question#5",
-      "This is Answer #3/Question#5",
-      "This is Answer #4/Question#5",
-    ],
-    correctAnswer: "This is Answer #1/Question#5", // Test answer
+    question:
+      "Which JavaScript label catches all the values, except for the ones specified?",
+    answers: ["Catch", "Label", "Try", "Default"],
+    correctAnswer: "Deafult",
   },
 ];
-
-// Insert question into the div question as a p tag
-// Create an ordered list with answers in li
-// Add data attributes to the answers with the question number and the answer
 
 // functions
 function hideQuestions() {
@@ -180,7 +152,6 @@ function endGame() {
   var score = secondsLeft;
 
   scoreEl.textContent = score;
-  //   timerEl = score;
   timerEl.textContent = 0;
   clearInterval(timerInterval);
   showAnswers.innerHTML = "";
@@ -189,7 +160,7 @@ function endGame() {
   showInitials();
 }
 
-// // logic
+// Event Listeners
 goBack.addEventListener("click", () => {
   hideScores();
   showWelcome();
@@ -197,6 +168,10 @@ goBack.addEventListener("click", () => {
 
 clearScores.addEventListener("click", () => {
   localStorage.clear();
+  // renderLocalstorage(listItem);
+
+  // var points = document.querySelector("#high-scores");
+  // points.appendChild("");
 });
 
 submitButton.addEventListener("click", function (event) {
@@ -205,14 +180,6 @@ submitButton.addEventListener("click", function (event) {
   var initials = initialsInput.value.trim();
   var userScore = secondsLeft;
 
-  //   var enterInit = document.getElementById("enter-initials");
-
-  //   enterInit.textContent = "Enter Initials";
-
-  //   for (var i = 0; i < localStorage.length; i++) {
-  //     // console.log(localStorage.key(i));
-  //     console.log(localStorage.getItem(localStorage.key(i)));
-  //   }
   if (initialsInput === "") {
     var enterInitials = document.getElementById("enter-initials");
     enterInitials.textContent = "What do we call you?";
@@ -226,9 +193,7 @@ submitButton.addEventListener("click", function (event) {
 
     showHighScore(highScoresArray);
     hideInitials();
-    // scoreList();
     showScores();
-    // displayScore();
   }
 });
 
