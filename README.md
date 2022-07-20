@@ -22,4 +22,8 @@ THEN I can save my initials and score
 
 The following image shows the web application's appearance and functionality:
 
-![Screenshot of working application](./.png)
+![Screenshot of working application](../Java-Coding-Quiz/assets/images/java-coding-quiz.png)
+
+## Created By:
+
+Colin McNatt
