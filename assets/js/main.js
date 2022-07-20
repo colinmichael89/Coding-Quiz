@@ -103,6 +103,7 @@ function showScores() {
   showScores.setAttribute("style", "display:block");
   timerEl.textContent = 0;
   clearInterval(timerInterval);
+  showHighScore(highScoresArray);
 }
 
 function hideScores() {
@@ -110,10 +111,6 @@ function hideScores() {
   hideScores.setAttribute("style", "display:none");
 }
 
-// function displayScore() {
-//   console.log(currentScore);
-//   console.log(initialsInput.value);
-// }
 function displayQuestion() {
   if (currentQuestion > questionsArray.length - 1) {
     endGame();
@@ -150,8 +147,11 @@ function setTime() {
 }
 
 function endGame() {
+  var score = secondsLeft;
   var scoreEl = document.querySelector(".your-score");
   var score = secondsLeft;
+  var enterInit = document.getElementById("enter-initials");
+  enterInit.textContent = "";
 
   scoreEl.textContent = score;
   timerEl.textContent = 0;
@@ -165,13 +165,16 @@ function endGame() {
 // Event Listeners
 goBack.addEventListener("click", () => {
   hideScores();
+  questionsEl.innerHTML = "";
+  highScores.innerHTML = "";
+  rightWrong.innerHTML = "";
+  showAnswers.innerHTML = "";
   showWelcome();
-  timerEl.textContent = 0;
-  clearInterval(timerInterval);
 });
 
 clearScores.addEventListener("click", () => {
   localStorage.clear();
+  highScores.innerHTML = "";
   highScoresArray = [];
   hideScores();
   showWelcome();
@@ -186,7 +189,6 @@ submitButton.addEventListener("click", function (event) {
   if (initialsInput.value === "") {
     var enterInitials = document.getElementById("enter-initials");
     enterInitials.textContent = "What do we call you?";
-    // showInitials();
   } else {
     renderLocalstorage();
     var initScore = initials + " " + userScore;
@@ -199,10 +201,10 @@ submitButton.addEventListener("click", function (event) {
 
     hideInitials();
     showScores();
+    initialsInput.value = "";
   }
 });
 
-// Is it here?
 function showHighScore(array) {
   for (var i = 0; i < array.length; i++) {
     var userEntry = array[i];
@@ -215,23 +217,14 @@ function showHighScore(array) {
 function renderLocalstorage() {
   var localstorageArray = JSON.parse(localStorage.getItem("highScoresArray"));
   if (localstorageArray !== null) {
+    highScoresArray = [];
     highScoresArray = localstorageArray;
-    // } else {
-    //   highScoresArray = [];
-    // }
   }
 }
 
-// function timeFunction() {
-//   setTimeout(function () {
-//     console.log("delay");
-//   }, 1000);
-// }
-
-// Attach event listener to start button to call
+// Attach event listener to buttons to call
 startButton.addEventListener("click", () => {
   hideWelcome();
-  // currentQuestion needs to be set back to 0 (index)
   secondsLeft = 75;
   currentQuestion = 0;
   setTime();
@@ -243,14 +236,12 @@ scoresEl.addEventListener("click", () => {
   showScores();
   hideInitials();
   hideQuestions();
-  // currentQuestion = "";
 });
 
 showAnswers.addEventListener("click", function (event) {
   if (
     event.target.textContent === questionsArray[currentQuestion].correctAnswer
   ) {
-    // text appears below - correct - delay then next question
     rightWrong.textContent = "Correct!";
     currentQuestion++;
     displayQuestion();
@@ -258,9 +249,7 @@ showAnswers.addEventListener("click", function (event) {
     rightWrong.textContent = "Incorrect";
     secondsLeft = secondsLeft - 10;
     currentQuestion++;
-    // timeFunction();
     displayQuestion();
-    // text appears below - incorrect - delay then next question
   }
 });
 hideScores();

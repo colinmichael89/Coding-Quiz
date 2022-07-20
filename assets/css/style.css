@@ -51,11 +51,12 @@ h2 {
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .high-scores-box {
   display: flex;
-  flex-direction: column-reverse;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
@@ -68,6 +69,13 @@ h2 {
   margin-top: 20px;
 } */
 
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 #high-scores {
   justify-content: center;
   align-items: center;
@@ -76,9 +84,12 @@ h2 {
 
 #go-back,
 #clear-scores {
-  padding: 10px;
   justify-content: center;
   margin-right: 10px;
+  background-color: aqua;
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
 }
 
 #high-scores li {
@@ -88,9 +99,7 @@ h2 {
 
 .start-button {
   margin-top: 20px;
-}
-
-button {
+  justify-items: center;
   background-color: aqua;
   border: none;
   font-size: 16px;
@@ -103,7 +112,7 @@ button {
 }
 
 #correct-incorrect {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 input {
@@ -111,14 +120,41 @@ input {
   border: none;
   font-size: 18px;
   padding: 10px 15px;
+  margin-left: 15px;
 }
 
 #enter-initials {
   font-size: 30px;
   font-weight: bolder;
-  margin-bottom: 15px;
+  margin-top: 15px;
+  text-align: center;
 }
 
 .view-scores {
   font-weight: bold;
+}
+
+#questions {
+  text-align: center;
+}
+
+#all-done {
+  text-align: center;
+}
+
+#final-score {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#enter-name {
+  text-align: center;
+}
+
+.submit {
+  background-color: aqua;
+  border: none;
+  font-size: 16px;
+  padding: 10px 20px;
+  margin-left: 10px;
 }
