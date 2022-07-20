@@ -110,10 +110,10 @@ function hideScores() {
   hideScores.setAttribute("style", "display:none");
 }
 
-function displayScore() {
-  console.log(currentScore);
-  console.log(initialsInput.value);
-}
+// function displayScore() {
+//   console.log(currentScore);
+//   console.log(initialsInput.value);
+// }
 function displayQuestion() {
   if (currentQuestion > questionsArray.length - 1) {
     endGame();
@@ -172,6 +172,7 @@ goBack.addEventListener("click", () => {
 
 clearScores.addEventListener("click", () => {
   localStorage.clear();
+  highScoresArray = [];
   hideScores();
   showWelcome();
 });
@@ -192,15 +193,16 @@ submitButton.addEventListener("click", function (event) {
     highScoresArray.push(initScore);
 
     localStorage.setItem("highScoresArray", JSON.stringify(highScoresArray));
-    highScoresArray = [];
 
     showHighScore(highScoresArray);
+    highScoresArray = [];
 
     hideInitials();
     showScores();
   }
 });
 
+// Is it here?
 function showHighScore(array) {
   for (var i = 0; i < array.length; i++) {
     var userEntry = array[i];
@@ -214,6 +216,9 @@ function renderLocalstorage() {
   var localstorageArray = JSON.parse(localStorage.getItem("highScoresArray"));
   if (localstorageArray !== null) {
     highScoresArray = localstorageArray;
+    // } else {
+    //   highScoresArray = [];
+    // }
   }
 }
 
