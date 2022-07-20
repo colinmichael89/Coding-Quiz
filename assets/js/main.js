@@ -214,8 +214,6 @@ function renderLocalstorage() {
   var localstorageArray = JSON.parse(localStorage.getItem("highScoresArray"));
   if (localstorageArray !== null) {
     highScoresArray = localstorageArray;
-    // localstorageArray = [];
-    // console.log(localstorageArray);
   }
 }
 
