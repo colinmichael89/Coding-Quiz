@@ -1,13 +1,3 @@
-// when user clicks "Start Game"
-// welcome message and start button disappear
-// first question appears - multiple choice (4 clickable answers)
-// timer starts (for (let i = 60; i > 0; i--)) else - game ends
-
-// when an answer is clicked:
-// if answer is correct - display "Correct" beneath line under question - delay - next question presented
-// else time is deducted (10 sec) - "wrong" displayed beneath question - delay - next question presented
-// if there are no more quetions - game ends
-
 // variable declaration
 var secondsLeft = 76;
 
