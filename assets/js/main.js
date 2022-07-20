@@ -101,6 +101,8 @@ function showInitials() {
 function showScores() {
   var showScores = document.querySelector(".high-scores-box");
   showScores.setAttribute("style", "display:block");
+  timerEl.textContent = 0;
+  clearInterval(timerInterval);
 }
 
 function hideScores() {
@@ -164,16 +166,14 @@ function endGame() {
 goBack.addEventListener("click", () => {
   hideScores();
   showWelcome();
+  timerEl.textContent = 0;
+  clearInterval(timerInterval);
 });
 
 clearScores.addEventListener("click", () => {
   localStorage.clear();
   hideScores();
   showWelcome();
-  // renderLocalstorage(listItem);
-
-  // var points = document.querySelector("#high-scores");
-  // points.appendChild("");
 });
 
 submitButton.addEventListener("click", function (event) {
@@ -182,7 +182,7 @@ submitButton.addEventListener("click", function (event) {
   var initials = initialsInput.value.trim();
   var userScore = secondsLeft;
 
-  if (initialsInput === "") {
+  if (initialsInput.value === "") {
     var enterInitials = document.getElementById("enter-initials");
     enterInitials.textContent = "What do we call you?";
     // showInitials();
@@ -192,8 +192,10 @@ submitButton.addEventListener("click", function (event) {
     highScoresArray.push(initScore);
 
     localStorage.setItem("highScoresArray", JSON.stringify(highScoresArray));
+    highScoresArray = [];
 
     showHighScore(highScoresArray);
+
     hideInitials();
     showScores();
   }
@@ -210,9 +212,10 @@ function showHighScore(array) {
 }
 function renderLocalstorage() {
   var localstorageArray = JSON.parse(localStorage.getItem("highScoresArray"));
-  console.log(localstorageArray);
   if (localstorageArray !== null) {
     highScoresArray = localstorageArray;
+    // localstorageArray = [];
+    // console.log(localstorageArray);
   }
 }
 
@@ -237,6 +240,7 @@ scoresEl.addEventListener("click", () => {
   showScores();
   hideInitials();
   hideQuestions();
+  // currentQuestion = "";
 });
 
 showAnswers.addEventListener("click", function (event) {
